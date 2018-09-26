@@ -1,0 +1,184 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.oxygenxml</groupId>
+  <artifactId>web-author-component-integration</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <properties>
+    <oxygen.version>21.0-SNAPSHOT</oxygen.version>
+  </properties>
+    
+  <dependencies>
+    <dependency>
+      <groupId>com.oxygenxml</groupId>
+      <artifactId>web-author-component</artifactId>
+      <version>${oxygen.version}</version>
+      <type>war</type>
+      <scope>provided</scope>
+    </dependency>
+  
+    <dependency>
+      <groupId>com.oxygenxml</groupId>
+      <artifactId>web-author-webdav-plugin</artifactId>
+      <version>${oxygen.version}</version>
+      <type>jar</type>
+      <classifier>plugin</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>web-author-webdav-server-plugin</artifactId>
+      <groupId>com.oxygenxml</groupId>
+      <version>${oxygen.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.oxygenxml</groupId>
+      <artifactId>web-author-charpicker-plugin</artifactId>
+      <version>${oxygen.version}</version>
+      <type>jar</type>
+      <classifier>plugin</classifier>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>web-author-svg-plugin</artifactId>
+      <groupId>com.oxygenxml</groupId>
+      <version>${oxygen.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>web-author-mathml-plugin</artifactId>
+      <groupId>com.oxygenxml</groupId>
+      <version>${oxygen.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <artifactId>web-author-rest-plugin</artifactId>
+      <groupId>com.oxygenxml</groupId>
+      <version>${oxygen.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    
+    <dependency>
+      <artifactId>web-author-frameworks</artifactId>
+      <groupId>com.oxygenxml</groupId>
+      <version>${oxygen.version}</version>
+      <type>zip</type>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <outputFileNameMapping>@{artifactId}@@{dashClassifier?}@.@{extension}@</outputFileNameMapping>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <overlays>
+            <overlay>
+              <groupId>com.oxygenxml</groupId>
+              <artifactId>web-author-component</artifactId>
+            </overlay>
+          </overlays>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.8</version>
+        <executions>
+          <!-- Bring frameworks into the frameworks dir -->
+          <execution>
+            <id>Bring frameworks into the frameworks dir</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeArtifactIds>web-author-frameworks</includeArtifactIds>
+              <outputDirectory>${project.build.directory}/frameworks/</outputDirectory>
+            </configuration>
+          </execution>
+          
+          <execution>
+            <id>Bring plugins into the plugins dir</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <stripVersion>true</stripVersion>
+              <excludes>META-INF/**</excludes>
+              <outputDirectory>${project.build.directory}/plugins/</outputDirectory>
+              <overWriteReleases>true</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+              <classifier>plugin</classifier>
+              <stripVersion>true</stripVersion>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>1.8</version>
+        <executions>
+          <!-- Also support plugins and frameworks drop-ins in the plugins/frameworks folders from the project base directory for non Maven resources -->
+          <execution>
+          	<id>copy-additional-plugins-and-frameworks</id>
+          	<phase>generate-resources</phase>
+          	<goals>
+              <goal>run</goal>
+            </goals>
+          	<configuration>
+          	  <target>
+          	    <copy quiet="true" failonerror="false" todir="${project.build.directory}/plugins/"> 
+          	      <fileset dir="${project.basedir}/plugins"/>
+          	    </copy>
+          	    <copy quiet="true" failonerror="false" todir="${project.build.directory}/frameworks/">
+          	      <fileset dir="${project.basedir}/frameworks"/>
+          	    </copy>
+          	  </target>
+          	</configuration>
+          </execution>
+          
+          <!-- zip plugins to bundle -->
+          <execution>
+            <id>zip-plugins</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <zip basedir="${project.build.directory}/plugins/" 
+                  destfile="${project.build.directory}/${project.artifactId}/WEB-INF/plugins.zip"/>
+              </target>
+            </configuration>
+          </execution>
+          <!-- zip the frameworks to bundle -->
+          <execution>
+            <id>zip-selected-frameworks-for-deploy</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <zip basedir="${project.build.directory}/frameworks/" 
+                 destfile="${project.build.directory}/${project.artifactId}/WEB-INF/frameworks.zip"/>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
