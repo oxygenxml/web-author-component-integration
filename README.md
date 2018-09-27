@@ -1,12 +1,12 @@
 # web-author-component-integration
-A sample maven project using the Web Author Component
+A sample Maven project using the Web Author Component
 
 This project generates a .war by overlaying the Web Author Component and adding frameworks and plugins to it.
 
 ## Plugins
 
 
-Plugins added as maven dependencies:
+Plugins added as Maven dependencies:
 
 * web-author-webdav-plugin
 * web-author-webdav-server-plugin
@@ -27,7 +27,7 @@ The application also bundles automatically as plugins all the folders from the `
 ## Frameworks
 
 
-Frameworks already added through maven dependencies:
+Frameworks already added through Maven dependencies:
 
 * dita
 * dockbook
@@ -39,6 +39,6 @@ Frameworks already added through maven dependencies:
 
 ### Adding new frameworks
 
-The project bundles all the frameworks from the  `web-author-frameworks` artifact. To add a new framework that is a mavem artifact you just have to unpack it in the `${project.build.directory}/frameworks/` directory during the `generate-resources` maven phase (This is what we do with  `web-author-frameworks`).
+The project bundles all the frameworks from the  `web-author-frameworks` artifact. To add a new framework that is a Maven artifact you just have to unpack it in the `${project.build.directory}/frameworks/` directory during the `generate-resources` Maven phase (This is what we do with  `web-author-frameworks`).
 
 The application also bundles automatically as frameworks all the content of the `web-author-component-integration/frameworks/` directory (you will have to create it) so you can copy the desired framework(s) in it.
