@@ -14,7 +14,6 @@ Plugins added as Maven dependencies:
 * web-author-svg-plugin
 * web-author-mathml-plugin
 * web-author-rest-plugin
-* web-author-frameworks
 
 ### Adding new plugins
 
