@@ -39,3 +39,9 @@ Frameworks already added through Maven dependencies:
 The project bundles all the frameworks from the  `web-author-frameworks` artifact. To add a new framework that is a Maven artifact, you just need to unpack it in the `${project.build.directory}/frameworks/` directory during the `generate-resources` Maven phase (this is what is done with `web-author-frameworks`).
 
 The application also automatically bundles all the content of the `web-author-component-integration/frameworks/` directory (you will have to create it) as frameworks so that you can copy the desired framework(s) in it.
+
+Copyright and License
+---------------------
+Copyright 2018 Syncro Soft SRL.
+
+This project is licensed under [Apache License 2.0](https://github.com/oxygenxml/web-author-component-integration/blob/master/LICENSE)
