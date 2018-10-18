@@ -7,7 +7,7 @@
   <packaging>war</packaging>
   
   <properties>
-    <oxygen.version>21.0-SNAPSHOT</oxygen.version>
+    <oxygen.version>20.1.1</oxygen.version>
   </properties>
     
   <dependencies>
@@ -28,12 +28,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <artifactId>web-author-webdav-server-plugin</artifactId>
-      <groupId>com.oxygenxml</groupId>
-      <version>${oxygen.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>com.oxygenxml</groupId>
       <artifactId>web-author-charpicker-plugin</artifactId>
       <version>${oxygen.version}</version>
@@ -45,18 +39,21 @@
       <artifactId>web-author-svg-plugin</artifactId>
       <groupId>com.oxygenxml</groupId>
       <version>${oxygen.version}</version>
+      <classifier>plugin</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <artifactId>web-author-mathml-plugin</artifactId>
       <groupId>com.oxygenxml</groupId>
       <version>${oxygen.version}</version>
+      <classifier>plugin</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <artifactId>web-author-rest-plugin</artifactId>
       <groupId>com.oxygenxml</groupId>
       <version>${oxygen.version}</version>
+      <classifier>plugin</classifier>
       <scope>provided</scope>
     </dependency>
     
