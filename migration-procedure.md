@@ -89,7 +89,7 @@ Declare ``com.oxygenxml:oxygen-sdk`` as provided to override parent's configurat
 
 
 ## In module ``bundle-frameworks``
-### Replace ``com.oxygenxml:frameworks`` artifact with ``com.oxygenxml::web-author-frameworks``:
+### Replace ``com.oxygenxml:frameworks`` artifact with ``com.oxygenxml:web-author-frameworks``:
 Replace the ``bundle-frameworks`` dependency:
 ```
   <dependency>
