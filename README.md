@@ -3,6 +3,9 @@ A sample Maven project using the Web Author Component.
 
 This project generates a .war by overlaying the Web Author Component and adding frameworks and plugins to it.
 
+## Migrating ``oxygen-sdk-samples`` project to use to use ``web-author-component`` and ``web-author-framewors`` 
+A step by step procedure can be found [here](migration-procedure.md) 
+
 ## Prerequisites
 
 Before running the  XML Web Author Component, you need to register for the Oxygen XML SDK at https://www.oxygenxml.com/oxygen_sdk/download.html and ask for a development license from support@oxygenxml.com.
