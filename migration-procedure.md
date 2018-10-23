@@ -1,9 +1,16 @@
-## Migrating the ``oxygen-sample-webapp`` project to use the new WebAuthor speciffic artifacts
+## Migrating the Oxygen XML SDK sample project to use the ``com.oxygenxml:web-author-component`` artifacts
 
-### Using ``web-author-component`` artifact instead of ``oxygen-webapp`` in module ``oxygen-sample-webapp``
+## In the root pom.xml:
+Declare the Web Author Component version as a property in the  ``<properties>`` element like:
+ ``<web.author.component.version>[Placeholder]</web.author.component.version>``, where ``[Placeholder]`` must be replace with the actual version like 20.1.1
 
 
-Remove the old ``oxygen-webapp`` dependency
+
+## In module ``oxygen-sample-webapp``
+
+### Replace ``com.oxygenxml:oxygen-webapp`` artifacts with ``com.oxygenxml:web-author-component``
+Remove the old ``com.oxygenxml:oxygen-webapp:war`` dependency:
+```
     <dependency>
       <groupId>com.oxygenxml</groupId>
       <artifactId>oxygen-webapp</artifactId>
@@ -16,7 +23,10 @@ Remove the old ``oxygen-webapp`` dependency
         </exclusion>
       </exclusions>
     </dependency>
+```
 
+Remove the old ``com.oxygenxml:oxygen-webapp:classes`` dependency:
+```
     <dependency>
       <groupId>com.oxygenxml</groupId>
       <artifactId>oxygen-webapp</artifactId>
@@ -29,29 +39,29 @@ Remove the old ``oxygen-webapp`` dependency
         </exclusion>
       </exclusions>
     </dependency>
+```
 
-Add a dependency for the ``web-author-component``
-
+Add the new ``web-author-component`` dependency:
+```
     <dependency>
       <groupId>com.oxygenxml</groupId>
       <artifactId>web-author-component</artifactId>
-      <version>${oxygen.sdk.version}</version>
+      <version>${web.author.component.version}</version>
       <type>war</type>
     </dependency>
+```
 
-
+### Update ``maven-war-plugin`` section
 Replace the ``oxygen-webapp`` overlay configuration:
 ```
 <overlay>
   <groupId>com.oxygenxml</groupId>
   <artifactId>oxygen-webapp</artifactId>
   <excludes>
-    <exclude>WEB-INF/frameworks.zip</exclude>
-    <exclude>WEB-INF/options.zip</exclude>
-    <exclude>WEB-INF/plugins.zip</exclude>
+    ...
   </excludes>
 </overlay>
-````
+```
 
 with new ``web-author-component`` overlay
 ```
@@ -61,9 +71,22 @@ with new ``web-author-component`` overlay
 </overlay>
 ```
 
-### Using the new ``web-author-frameworks`` artifact instead of ``frameworks`` in ``bundle-frameworks`` module
+### Mark the SDK dependency as `provided`
+Declare ``com.oxygenxml:oxygen-sdk`` as provided to override parent's configuration by adding:
+```
+    <dependency>
+      <groupId>com.oxygenxml</groupId>
+      <artifactId>oxygen-sdk</artifactId>
+      <version>${oxygen.sdk.version}</version>
+      <scope>provided</scope>
+    </dependency>
+```
 
-Replace the ``bundle-frameworks`` dependency
+
+
+## In module ``bundle-frameworks``
+### Replace ``com.oxygenxml:frameworks`` artifact with ``com.oxygenxml:web-author-frameworks``:
+Replace the ``bundle-frameworks`` dependency:
 ```
   <dependency>
     <groupId>com.oxygenxml</groupId>
@@ -73,15 +96,24 @@ Replace the ``bundle-frameworks`` dependency
     <scope>provided</scope>
   </dependency>
 ```
-with the new one
+with the new one:
 ```
     <dependency>
-      <artifactId>web-author-frameworks</artifactId>
       <groupId>com.oxygenxml</groupId>
-      <version>${oxygen.sdk.version}</version>
+      <artifactId>web-author-frameworks</artifactId>
+      <version>${web.author.component.version}</version>
       <type>zip</type>
       <scope>provided</scope>
     </dependency>
+    
 ```
 
-Change the `copy-frameworks` maven-dependency-plugin configuration to use the new artifact
+Update the ``artifactId`` from the configuration of the  ``maven-dependency-plugin`` to use the new frameworks artefact, "``com.oxygenxml::web-author-frameworks``": 
+Replace
+```
+                  <artifactId>frameworks</artifactId>
+```
+with
+```
+                  <artifactId>web-author-frameworks</artifactId>
+```
