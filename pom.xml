@@ -7,7 +7,7 @@
   <packaging>war</packaging>
   
   <properties>
-    <oxygen.version>20.1.1</oxygen.version>
+    <oxygen.version>21.0-SNAPSHOT</oxygen.version>
   </properties>
   
   <repositories>
