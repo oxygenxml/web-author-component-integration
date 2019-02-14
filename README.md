@@ -3,7 +3,7 @@ A sample Maven project using the Web Author Component.
 
 This project generates a .war by overlaying the Web Author Component and adding frameworks and plugins to it.
 
-## Migrating ``oxygen-sdk-samples`` project to use to use ``web-author-component`` and ``web-author-framewors`` 
+## Migrating ``oxygen-sdk-samples`` project to use to use ``web-author-component`` and ``web-author-frameworks`` 
 A step by step procedure can be found [here](migration-procedure.md) 
 
 ## Prerequisites
