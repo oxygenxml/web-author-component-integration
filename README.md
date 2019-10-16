@@ -24,7 +24,19 @@ Plugins added as Maven dependencies:
 
 ### Adding new plugins
 
-The project bundles all it's dependencyes that have the `plugin` classifier so that if the plugin has this classifier, you just need to declare a dependency on it. You can use the plugins already added as examples.
+The project bundles all it's Maven dependencies that have the `plugin` classifier. So, if the plugin you want to add can be found on a Maven repository and it has this classifier, you just need to declare a dependency on it. You can use the plugins declared in the `pom.xml` file as examples.
+
+To add the additional **File comparison plugin**, you should add the following dependency in the `pom.xml` file:  
+
+    <dependency>
+      <artifactId>web-author-diff-plugin</artifactId>
+      <groupId>com.oxygenxml</groupId>
+      <version>${oxygen.version}</version>
+      <classifier>plugin</classifier>
+      <scope>provided</scope>
+    </dependency>
+    
+Note that this plugin requires a separate license. For more details, contact the Oxygen sales team at sales@oxygenxml.com. 
 
 The application also automatically bundles all the folders from the `web-author-component-integration/plugins/` directory (you will have to create it) as plugins so that you can copy the desired plugin(s) in it.
 
