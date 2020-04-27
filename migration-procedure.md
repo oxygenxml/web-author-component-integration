@@ -2,7 +2,7 @@
 
 ## In the root pom.xml:
 Declare the Web Author Component version as a property in the  ``<properties>`` element like:
- ``<web.author.component.version>[Placeholder]</web.author.component.version>``, where ``[Placeholder]`` must be replace with the actual version like 20.1.1
+ ``<web.author.component.version>[Placeholder]</web.author.component.version>``, where ``[Placeholder]`` must be replace with the actual version like 22.1.0.0.
 
 
 
