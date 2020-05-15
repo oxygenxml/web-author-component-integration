@@ -64,6 +64,13 @@
       <classifier>plugin</classifier>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <artifactId>web-author-outline-plugin</artifactId>
+      <groupId>com.oxygenxml</groupId>
+      <version>${oxygen.version}</version>
+      <classifier>plugin</classifier>
+      <scope>provided</scope>
+    </dependency>
     
     
     <dependency>
