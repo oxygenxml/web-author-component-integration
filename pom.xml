@@ -5,7 +5,17 @@
   <artifactId>web-author-component-integration</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  
+
+  <developers>
+    <developer>
+      <name>Mihai Coanda</name>
+      <email>mihai_coanda@sync.ro</email>
+      <roles>
+        <role>manager</role>
+      </roles>
+    </developer>
+  </developers>
+
   <properties>
     <oxygen.version>[23.0.0.0, 23.1.0.0)</oxygen.version>
   </properties>
