@@ -36,7 +36,7 @@ To add the additional **File comparison plugin**, you should add the following d
       <scope>provided</scope>
     </dependency>
     
-Note that this plugin requires a separate license. For more details, contact the Oxygen sales team at sales@oxygenxml.com. 
+Note that this plugin requires a separate license. For more details, contact the Oxygen XML sales team at sales@oxygenxml.com. 
 
 The application also automatically bundles all the folders from the `web-author-component-integration/plugins/` directory (you will have to create it) as plugins so that you can copy the desired plugin(s) in it.
 
